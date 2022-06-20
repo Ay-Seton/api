@@ -2,7 +2,11 @@
 npm Install in the api folder directory
 Run npm start to start the server
 
-.env file has the Database connection strings for MongoDB. 
+Create a .env file in the root foler filling in the DataBase connection strings for MongoDB, and JWT token. 
+
++ MONGO =  '<conectionString>'
++ JWT = '<JWT TOKEN'
+
 
 
 
