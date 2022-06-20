@@ -35,6 +35,21 @@ export const updateRoom = async ( req, res, next)=> {
     }
 }
 
+
+//ROUTE TO UPDATE THE DATES THAT ROOMS ARE UNAVAILABLE
+export const updateRoomAvailability = async ( req, res, next)=> {
+    try {
+       await Room.updateOne({"roomNumbers._id": req.params.id},{    //condition for roomNumber property to be updated
+            $push: {                                          //push method will add to the exisiting list. Set will replace it. 
+                "roomNumbers.$.unavailableDates": req.body.dates,     //updating nested property in MongoDB syntax
+            }
+        })
+        res.status(200).json("Room date has been updated")
+    } catch (err) {
+        next (err);
+    }
+}
+
 export const deleteRoom = async ( req, res, next )=> {
     const hotelId = req.params.hotelid; //save the id of the hotel to be deleted in a var. Save in request parameter. 
 
