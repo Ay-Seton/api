@@ -10,8 +10,7 @@ export const register = async (req, res, next)=> {
 
 
         const newUser = new User({                                          //create a user object from the request body
-            username: req.body.username, 
-            email: req.body.email, 
+           ...req.body,        //other properties in the req.body asides password     
             password: hash,
         })
 
@@ -39,7 +38,7 @@ export const login = async (req, res, next)=> {
            httpOnly: true,                        // security
        })
        .status(200)                           //success status
-       .json(otherDetails);                 //destructured user object
+       .json({details:{otherDetails}, isAdmin});                 //destructured user object
     } catch (err){                      //catch error
        next(err)     // pass error if any to the next operation
     }
